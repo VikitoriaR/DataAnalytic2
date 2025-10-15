@@ -1,0 +1,7 @@
+select pass.name
+from Pass_in_trip pint
+INNER JOIN passenger pass ON pint.passenger = pass.id
+INNER JOIN trip ON pint.trip = trip.id
+where trip.plane = 'TU-134'
+and town_to = 'Moscow'
+group by pass.name;
