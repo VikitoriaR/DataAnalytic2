@@ -17,3 +17,16 @@ from r1)
 select classroom
 from r1
 where total = '5'
+
+--60
+with tab as(select teac.id, class.name,
+dense_rank() over(partition by teac.id order by class.name) as rank
+from schedule sched
+LEFT JOIN teacher teac ON sched.teacher = teac.id
+left join class on sched.class = class.id
+where class.name like '11%'
+order by teac.id)
+select id as teacher
+from tab
+where rank >=2
+group by teacher;
