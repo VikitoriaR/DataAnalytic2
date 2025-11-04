@@ -12,7 +12,7 @@ with r1 as (select classroom, count(classroom) as total
             group by classroom)
 select classroom
 from r1
-where total = (select max(total) from r1)
+where total = (select max(total) from r1);
 
 --60
 with tab as(select teac.id, class.name,
@@ -50,7 +50,7 @@ values
   left join rooms rms ON Rsv.room_id = rms.id
   left join users u ON Rsv.user_id = u.id
   where rms.address = '11218, Friel Place, New York'
-  and u.name = 'George Clooney'), 5)
+  and u.name = 'George Clooney'), 5);
 
 --68
 select
@@ -74,7 +74,7 @@ select rooms.owner_id,
 coalesce(sum(rsv.total), 0) as total_earn
 from rooms
 left join Reservations rsv on rooms.id = rsv.room_id
-group by rooms.owner_id
+group by rooms.owner_id;
   
 --71
 
@@ -86,4 +86,4 @@ with tab as (select user_id as active_users
              inner join rooms on rsv.room_id = rooms.id)
 select round(
 ((select count(active_users) from tab)::numeric)/
-((select count(*) from users)::numeric) * 100, 2) as percent
+((select count(*) from users)::numeric) * 100, 2) as percent;
